@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💌 Open Me – Day 1</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(180deg,#ffe9f4,#ffd6e8,#fff0f7);
+font-family:'Quicksand',sans-serif;
+position:relative;
+}
+
+/* Falling Petals */
+
+#petals{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
+}
+
+#petals span{
+position:absolute;
+top:-40px;
+font-size:22px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-50px) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:.9;
+}
+
+}
+
+/* Title */
+
+.title{
+position:absolute;
+top:40px;
+font-size:30px;
+font-weight:bold;
+color:#ff5f9f;
+text-shadow:2px 2px white;
+z-index:5;
+}
+
+/* Envelope */
+
+.envelope{
+position:relative;
+width:320px;
+height:220px;
+cursor:pointer;
+z-index:5;
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+
+50%{
+transform:translateY(-8px);
+}
+
+}
+
+/* Back */
+
+.back{
+position:absolute;
+bottom:0;
+width:100%;
+height:180px;
+background:#f9b8cf;
+border-radius:0 0 20px 20px;
+z-index:1;
+}
+
+/* Letter */
+
+.letter{
+position:absolute;
+left:20px;
+bottom:15px;
+width:280px;
+height:170px;
+background:white;
+border-radius:18px;
+padding:20px;
+overflow:auto;
+z-index:2;
+transition:1.2s;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+/* Front */
+
+.front{
+position:absolute;
+bottom:0;
+width:100%;
+height:180px;
+background:#ffc7da;
+clip-path:polygon(0 0,50% 45%,100% 0,100% 100%,0 100%);
+z-index:3;
+}
+
+/* Top Flap */
+
+.flap{
+position:absolute;
+top:0;
+width:100%;
+height:120px;
+background:#f79bc0;
+clip-path:polygon(0 0,50% 100%,100% 0);
+transform-origin:top;
+transition:1s;
+z-index:4;
+}
+
+/* Ribbon */
+
+.ribbon{
+position:absolute;
+bottom:82px;
+width:100%;
+height:12px;
+background:white;
+z-index:5;
+}
+
+.ribbon::after{
+content:"🎀";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+top:-18px;
+font-size:28px;
+}
+
+/* Open Animation */
+
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+transform:translateY(-200px);
+z-index:10;
+}
+
+/* Tap */
+
+.tap{
+position:absolute;
+bottom:45px;
+font-size:18px;
+color:#ff6fa8;
+animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+
+50%{
+opacity:.3;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<div class="title">
+💌 Open Me 💌
+</div>
+
+<div class="envelope" id="envelope">
+
+<div class="back"></div>
+
+<div class="letter"><h2 style="text-align:center;color:#ff5c99;">
+💌 Open Me – Day 1
+</h2>
+
+<p style="text-align:center;line-height:1.8;font-family:'Patrick Hand',cursive;font-size:21px;color:#555;">
+
+If today feels ordinary,<br>
+let this little envelope remind you of one thing... 🌸
+
+<br><br>
+
+<b style="color:#ff4f8b;">
+Someone is smiling because you exist.
+</b>
+
+<br><br>
+
+I hope today brings you good luck 🍀,<br>
+unexpected laughter 🌷,<br>
+and at least one moment that makes you think...
+
+<br><br>
+
+<i>"Today wasn't so bad."</i> 🤍
+
+<br><br>
+
+Have a wonderful <b>Day 1</b> bacchaaa. 🤍
+
+<br><br>
+
+<b style="font-size:24px;color:#ff5f9f;">
+I AM ALWAYS THERE FOR YOUUU 😭🎀
+</b>
+
+<br><br>
+
+🌸🎀💖🧸✨
+
+</p>
+
+</div>
+
+<div class="front"></div>
+
+<div class="flap"></div>
+
+<div class="ribbon"></div>
+
+</div>
+
+<div class="tap">
+👇 Tap the envelope 👇
+</div>
+
+<script>
+
+const envelope=document.getElementById("envelope");
+
+envelope.onclick=()=>{
+
+envelope.classList.toggle("open");
+
+for(let i=0;i<70;i++){
+
+let c=document.createElement("span");
+
+c.innerHTML=["🌸","💖","✨","🎀","🤍","🎊"][Math.floor(Math.random()*6)];
+
+c.style.position="fixed";
+c.style.left="50vw";
+c.style.top="45vh";
+c.style.fontSize=(16+Math.random()*16)+"px";
+c.style.transition="all 2s ease";
+c.style.pointerEvents="none";
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+c.style.left=Math.random()*100+"vw";
+c.style.top=Math.random()*100+"vh";
+c.style.opacity="0";
+c.style.transform=`rotate(${Math.random()*720}deg)`;
+},20);
+
+setTimeout(()=>c.remove(),2200);
+
+}
+
+};
+
+const petals=document.getElementById("petals");
+
+setInterval(()=>{
+
+const p=document.createElement("span");
+
+p.innerHTML=["🌸","🌸","💮","💗","✨"][Math.floor(Math.random()*5)];
+
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(5+Math.random()*5)+"s";
+p.style.fontSize=(18+Math.random()*16)+"px";
+
+petals.appendChild(p);
+
+setTimeout(()=>p.remove(),10000);
+
+},120);
+
+</script>
+
+</body>
+</html>
